@@ -1,14 +1,16 @@
 # tronbyt-custom-apps
 
 Apps served to a Tronbyt server via the per-user **custom apps repository**
-setting (`app_repo_url`). The server clones this repo and scans `apps/<name>/`,
-so the layout mirrors [tronbyt/apps](https://github.com/tronbyt/apps).
+setting (`app_repo_url`, under "Custom Apps Repository" in user settings — not
+the "System Apps Repository" field above it). The server clones this repo and
+scans `apps/<name>/`, so the layout mirrors
+[tronbyt/apps](https://github.com/tronbyt/apps).
 
 This exists to run an app on real hardware *before* it is merged upstream.
 
-## apps/mbta
+## apps/mbta-dev
 
-MBTA departures, ahead of upstream. Currently carries the changes in
+MBTA departures, ahead of upstream. Tracks the changes in
 [tronbyt/apps#646](https://github.com/tronbyt/apps/pull/646) and
 [tronbyt/apps#648](https://github.com/tronbyt/apps/pull/648):
 
@@ -19,8 +21,21 @@ MBTA departures, ahead of upstream. Currently carries the changes in
   Main St @ Briggs St, consecutive 137 buses run to Oak Grove and to Malden;
   both previously read "MALDEN CENTER STATION".
 - Excludes CANCELLED trips, which were shown as live departures.
-- Adds a route filter at stops served by more than one route.
+- Adds a route filter listing the routes serving the chosen stop.
 - Fixes the Mattapan badge rendering as an empty circle.
 
-Once those PRs merge, delete `apps/mbta` here so the system app takes over
-again. Two copies of the same app id will otherwise both appear in the picker.
+### Why the id is `mbta-dev` and not `mbta`
+
+The app picker builds its thumbnail URL as `/preview/app/{id}`, keyed on the
+manifest id alone. While this app declared `id: mbta` it collided with the
+built-in app of the same id, and the picker showed **upstream's** screenshot
+next to our entry — which made a working install look like it had not updated.
+
+So the manifest here deliberately differs from the pull request by three lines
+(`id`, `name`, `summary`). **Do not upstream those.** The PR must keep
+`id: mbta`.
+
+### When the PRs merge
+
+Delete `apps/mbta-dev` from this repo and install the built-in `mbta` app
+instead. Leaving both installed means two apps doing the same job.

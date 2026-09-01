@@ -1,7 +1,7 @@
 ---
-id: mbta
-name: MBTA
-summary: MBTA departures
+id: mbta-dev
+name: MBTA Dev
+summary: MBTA departures, dev build
 desc: MBTA bus and rail departure times. Updated to support Tronbyt.
 author: Marcus Better & Eric Pierce
 fileName: mbta.star
