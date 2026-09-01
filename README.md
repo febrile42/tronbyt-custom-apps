@@ -28,6 +28,15 @@ MBTA departures, ahead of upstream. Tracks the changes in
 - Folds the route into the stop list, so picking a stop picks the route and
   direction together. This replaces a `schema.Generated` dropdown that never
   rendered on a real server.
+- Keeps the configured stop selectable when the settings page is reopened. The
+  page rebuilds the list from the *device's* location, not the one that was
+  searched, and reselects the saved stop only on an exact match, so a stop
+  outside the device's radius silently reverted to the nearest one.
+- Passes the configured API key to the stop lookups. They previously went out
+  keyless against a 20 request/minute limit, and building the list takes about
+  nine, so two settings loads in a minute started returning 429.
+- Documents the location field: search by street address or coordinates, since
+  a town name centres on the town and only stops within about a mile are listed.
 - Fixes the Mattapan badge rendering as an empty circle.
 
 ### Why the id is `mbta-dev` and not `mbta`
