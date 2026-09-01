@@ -145,8 +145,8 @@ def headsign(prediction, route_attrs, trips, attrs):
 
     The route's direction_destinations only describes the line as a whole, so at
     a stop midway along it every vehicle reads as the far terminus. Route 137 at
-    Main St @ Briggs St is the clear case: consecutive buses run to Oak Grove and
-    to Malden, but direction_destinations labels both "Malden Center Station".
+    North Ave @ Church St is the clear case: consecutive buses run to Oak Grove
+    and to Malden, but direction_destinations labels both "Malden Center Station".
     The per-trip headsign is the real answer; the route is the fallback for when
     a trip is missing from the response's included section.
     """
@@ -508,7 +508,7 @@ def get_schema():
                 id = "stop",
                 name = "Stop",
                 desc = "Search by street address, or by coordinates such as " +
-                       "42.4711,-71.0613, to centre on a specific stop. A town " +
+                       "42.5056,-71.0784, to centre on a specific stop. A town " +
                        "name centres on the town, and only stops within about a " +
                        "mile of that point are listed.",
                 icon = "bus",
