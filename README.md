@@ -21,7 +21,13 @@ MBTA departures, ahead of upstream. Tracks the changes in
   Main St @ Briggs St, consecutive 137 buses run to Oak Grove and to Malden;
   both previously read "MALDEN CENTER STATION".
 - Excludes CANCELLED trips, which were shown as live departures.
-- Adds a route filter listing the routes serving the chosen stop.
+- Disambiguates same-named stops. The two stops on opposite sides of a street
+  share one name, so around Melrose "Main St @ Lebanon St" appeared twice with
+  nothing to tell them apart. Stops now read e.g. "Main St @ Lebanon St
+  (137 to Reading Depot)".
+- Folds the route into the stop list, so picking a stop picks the route and
+  direction together. This replaces a `schema.Generated` dropdown that never
+  rendered on a real server.
 - Fixes the Mattapan badge rendering as an empty circle.
 
 ### Why the id is `mbta-dev` and not `mbta`
