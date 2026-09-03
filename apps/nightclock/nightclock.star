@@ -29,6 +29,13 @@ FALSE_VALUES = ["false", "0", "no", "off"]
 WIDE_FONT = "10x20"
 WIDE_FONT_SECONDARY = "5x8"
 
+# Five frames lit and five dark at FRAME_MS gives a one second blink, matching
+# the Custom Clock app. The separator is dropped to black rather than removed so
+# the digits either side of it do not shift.
+BLINK_FRAMES = 5
+FRAME_MS = 100
+BLINK_OFF_COLOR = "#000"
+
 def is_hex_color(value):
     """Whether this is something render.Text will accept as a colour.
 
@@ -111,11 +118,25 @@ def main(config):
     twelve_hour = cfg_bool(config, "twelve_hour", True) and font != WIDE_FONT
     time_format = "3:04 PM" if twelve_hour else "15:04"
 
+    # Split on the separator so it can be animated independently of the digits.
+    # Both formats contain exactly one colon: "15:04", or "3:04 PM" where the
+    # meridiem stays with the minutes.
+    hour, minutes = now.format(time_format).split(":")
+
+    if cfg_bool(config, "blink", True):
+        frames = [render.Text(":", font = font, color = color)] * BLINK_FRAMES
+        frames.extend([render.Text(":", font = font, color = BLINK_OFF_COLOR)] * BLINK_FRAMES)
+        separator = render.Animation(children = frames)
+    else:
+        separator = render.Text(":", font = font, color = color)
+
     children = [
-        render.Text(
-            content = now.format(time_format),
-            font = font,
-            color = color,
+        render.Row(
+            children = [
+                render.Text(content = hour, font = font, color = color),
+                separator,
+                render.Text(content = minutes, font = font, color = color),
+            ],
         ),
     ]
 
@@ -128,7 +149,7 @@ def main(config):
         ))
 
     return render.Root(
-        delay = 1000,
+        delay = FRAME_MS,
         child = render.Box(
             child = render.Column(
                 expanded = True,
@@ -180,6 +201,13 @@ def get_schema():
                 name = "12-hour clock",
                 desc = "Show 12-hour time instead of 24-hour.",
                 icon = "clock",
+                default = True,
+            ),
+            schema.Toggle(
+                id = "blink",
+                name = "Blinking separator",
+                desc = "Blink the colon between hours and minutes.",
+                icon = "gear",
                 default = True,
             ),
             schema.Toggle(
