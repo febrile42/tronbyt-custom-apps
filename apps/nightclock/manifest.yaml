@@ -1,0 +1,13 @@
+---
+id: nightclock
+name: Night Clock
+summary: Very dim clock for night
+desc: A minimal clock whose colour is configurable all the way down to near-black, for use as a night mode the panel's own brightness control cannot reach.
+author: febrile42
+fileName: nightclock.star
+packageName: nightclock
+recommendedInterval: 1
+category: clocks
+tags:
+  - clock
+  - night

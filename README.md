@@ -8,6 +8,12 @@ scans `apps/<name>/`, so the layout mirrors
 
 This exists to run an app on real hardware *before* it is merged upstream.
 
+## apps/nightclock
+
+A very dim clock, for use as a night mode below the panel's hardware brightness
+floor. Landed here untested as a starting point; reviewed and revised in
+subsequent commits before going on hardware.
+
 ## apps/mbta-dev
 
 MBTA departures, ahead of upstream. Tracks the changes in
