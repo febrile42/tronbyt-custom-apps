@@ -72,10 +72,11 @@ METADATA_TTL = 43200
 # Track images the upstream metadata feed does not carry yet. Both circuits are
 # on the 2026 calendar - madring is round 14 and sepang is round 16 - and both
 # were absent from tracks.json, which is what broke this app on 6 Sep. Traced
-# from the circuit diagrams credited in README.md and encoded to match the
-# feed's own format: 30x24 PNG, #9e9e9e on black.
+# from the open geodata credited in README.md and encoded to match the feed's
+# own format: 30x24 PNG, #9e9e9e on black. make_track_images.py regenerates
+# them; it reproduces an existing feed tile from the same pipeline as a check.
 EXTRA_TRACKS = {
-    "madring": "iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAsUlEQVR42u1WSw6FIAysxJPOwXpV3qpPbFqlFGXjJCSCdIb+lI2IKi1AoUVYJrzPIGFm9x2A0z6Zb1c5viL0yFs7ACYHAFu43axJe7wXm/ZZc++eaETQi4x4rLkAHMIjgp5XlrhZXBnRkRo4tVNUNGtXek8dCWOX8OiJI6G28G+nuyKZ1W7pL1cmUt9P4vG8alQZzFzbuaxZ69lR3iikcI4zfRrOsRZ7wtvbi8B32ZuJH/KAde+mpjQYAAAAAElFTkSuQmCC",
+    "madring": "iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAs0lEQVR42sVWURKFIAg0xpNysL2q79cKg7dg7YwfKUEsK3S01kb7AL3aIYDTs6qae0c246vTVVBVvdkPdgEYAG5789nqvGczWtnOGVo+Hqm+0hT5OM92RojCJ7qZMgmbpVcGD8IGrUCKshTVAF7L0qS6snm4gdmXs3oQq5VFkSmPvKnishqXBLbG1w5RUfOY7cmhwNad3tHRJKrSagFK9NpU1DU0FpkR+c/quzqTh/TPHosfYBLiB7O1eDQAAAAASUVORK5CYII=",
     "sepang": "iVBORw0KGgoAAAANSUhEUgAAAB4AAAAYCAYAAADtaU2/AAAAzklEQVR42sVWSQ7AIAhU40t9GF+1l5JQi8jWlMSDigwMiNZSyiw/SLcoA8BjPsb4FpgCItjqRBowB8bpRKKedADABIC5rnNDq8eNnhnBZ8XlKUIpkBBt6zk6l9JW8R5HaJYixL11/QEcvZsnx6jtltEMTsLZfkUcdULqbjSd9S6CY4480XEUI3jHDVTigKwMaNirkddpx4amxaqAJQBLKqhDPev58xRkuPF7zjRLPrMoZ6neGaEfgKxmk0Ktle7mbYES9RpJu8dW+kPAEbkAIf7/5xpQevcAAAAASUVORK5CYII=",
 }
 

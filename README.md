@@ -26,7 +26,9 @@ it reads as being stuck rather than broken.
   instead of failing. Byte-identical output when the image is present. Also on
   the `f1-missing-track-image` branch of the apps fork.
 - Adds `madring` (round 14) and `sepang` (round 16) images locally, so the
-  circuit map still draws. See that app's README for sources and licences.
+  circuit map still draws. Traced from OpenStreetMap and a CC0 diagram; the
+  pipeline is checked by reproducing a tile the feed already ships. See that
+  app's README for sources and licences.
 
 ## apps/mbta-dev
 

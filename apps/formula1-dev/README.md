@@ -44,19 +44,42 @@ Two circuits on the 2026 calendar have no image:
 
 ## Track image provenance
 
-Both images were traced from published circuit diagrams and encoded to match
-the feed's own format: 30x24 PNG, `#9e9e9e` on black. `make_track_images.py`
-regenerates them from the source SVGs.
+Both images are traced from open geodata and encoded to match the feed's own
+format: 30x24 PNG, `#9e9e9e` on black, rotated so the circuit fills the frame
+rather than pointing north. `make_track_images.py` regenerates them.
 
-| circuit | source | author | licence |
-|---------|--------|--------|---------|
-| `madring` | [Madring (2026).svg](https://commons.wikimedia.org/wiki/File:Madring_(2026).svg) | GabrielStella | CC BY-SA 3.0 |
-| `sepang` | [F1 circuits 2014-2018 - Sepang International Circuit (version 2).svg](https://commons.wikimedia.org/wiki/File:F1_circuits_2014-2018_-_Sepang_International_Circuit_(version_2).svg) | Firkin | CC0 |
+| circuit | source | licence | obligation |
+|---------|--------|---------|------------|
+| `madring` | [OpenStreetMap](https://www.openstreetmap.org/relation/18813472) relation 18813472 | ODbL 1.0 | attribution |
+| `sepang` | [F1 circuits 2014-2018 - Sepang International Circuit (version 2).svg](https://commons.wikimedia.org/wiki/File:F1_circuits_2014-2018_-_Sepang_International_Circuit_(version_2).svg) by Firkin | CC0 | none |
 
-The `madring` image is a derivative of a CC BY-SA 3.0 work and is offered under
-[CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) on the same
-terms. The `sepang` image carries no restrictions; the author is credited as a
-courtesy.
+Map data © OpenStreetMap contributors, available under the
+[Open Database Licence](https://opendatacommons.org/licenses/odbl/). The tile is
+an ODbL "Produced Work", so it carries an attribution requirement but **not**
+share-alike; it does not oblige anything about the licence of this repository.
+The Sepang image is public domain; Firkin is credited as a courtesy.
 
-Only the circuit geometry was used. None of the styling, colour, labelling or
-annotation from either source appears in the output.
+Madring is a street circuit, so most of the lap runs on ordinary public roads
+that are not tagged `highway=raceway`. Querying for raceway ways alone returns a
+fragmentary shape with gaps of 120 m and 700 m. The `route=raceway` relation
+lists all 24 member ways in order with `forward`/`backward` roles, and walking
+it in that order closes the lap exactly, every join at 0.0 m.
+
+## Checking the pipeline
+
+The tracing is verified two ways rather than eyeballed.
+
+**Against a tile the feed already has.** Rebuilding Circuit de
+Barcelona-Catalunya from OpenStreetMap through the same code reproduces the
+published tile's shape and orientation. That is what established the feed's
+convention: the tiles are rotated to fill the frame, not drawn north-up.
+
+**Against the published lap distance.** The traced laps come out at 5448 m for
+Madring against an official 5474 m, and 4683 m for Catalunya against an official
+4657 m. Both within 0.5%, which is about what the difference between a
+centreline and a measured racing line should be.
+
+The rotation is chosen by maximising drawn size in the tile, a purely functional
+criterion with no reference to any published diagram. On Catalunya it
+independently picks the orientation the feed already uses, and on Madring it
+picks the orientation the circuit is conventionally drawn in.
