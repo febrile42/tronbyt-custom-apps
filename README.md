@@ -14,6 +14,20 @@ A very dim clock, for use as a night mode below the panel's hardware brightness
 floor. Landed here untested as a starting point; reviewed and revised in
 subsequent commits before going on hardware.
 
+## apps/formula1-dev
+
+Formula 1 next-race, ahead of upstream. The app froze on the 6 Sep 2026 race
+and stayed there: the 2026 Spanish GP moved to the new `madring` circuit, which
+has no entry in the hand-curated track-image feed, and a missing key failed the
+whole render. A failed render leaves the device showing its last good frame, so
+it reads as being stuck rather than broken.
+
+- Falls back to centring the date, time and round when a circuit has no image,
+  instead of failing. Byte-identical output when the image is present. Also on
+  the `f1-missing-track-image` branch of the apps fork.
+- Adds `madring` (round 14) and `sepang` (round 16) images locally, so the
+  circuit map still draws. See that app's README for sources and licences.
+
 ## apps/mbta-dev
 
 MBTA departures, ahead of upstream. Tracks the changes in
